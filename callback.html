@@ -1,0 +1,8 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WHOOP 授权回调</title>
+<style>body{font-family:-apple-system,system-ui,sans-serif;max-width:640px;margin:8vh auto;padding:0 20px}code{display:block;background:#f4f4f5;padding:16px;border-radius:8px;word-break:break-all;font-size:15px}button{margin-top:12px;padding:10px 20px;font-size:15px}</style></head>
+<body><h2>WHOOP 授权回调</h2><p id="msg">正在读取授权码…</p><code id="code" style="display:none"></code><br><button id="copy" style="display:none">复制 code</button>
+<script>const q=new URLSearchParams(location.search),code=q.get("code"),err=q.get("error"),state=q.get("state");
+const msg=document.getElementById("msg"),box=document.getElementById("code"),btn=document.getElementById("copy");
+if(code){msg.textContent="授权成功！把下面这串 code 复制回来（10 分钟内有效）"+(state?"，state="+state:"");
+box.textContent=code;box.style.display="block";btn.style.display="inline-block";
+btn.onclick=()=>navigator.clipboard.writeText(code).then(()=>btn.textContent="已复制 ✓");}else{msg.textContent="没有拿到 code。"+(err?"WHOOP 返回错误："+err:"请检查地址栏。");}</script></body></html>
